@@ -33,10 +33,10 @@
               <h6 class="font-weight-light">Signing up is easy. It only takes a few steps</h6>
               <form class="pt-3" action="insert.php" method="POST">
                 <div class="form-group">
-                  <input type="text" class="form-control form-control-lg" id="exampleInputFirstName1" name="firstname" placeholder="Firstanme" required>
+                  <input type="text" class="form-control form-control-lg" id="exampleInputFirstName1" name="firstname" placeholder="First name"required>
                 </div>
                 <div class="form-group">
-                  <input type="text" class="form-control form-control-lg" id="exampleInputLastName1" name="lastame" placeholder="Lastanme"required>
+                  <input type="text" class="form-control form-control-lg" id="exampleInputLastName1" name="lastname" placeholder="Last name"required>
                 </div>
                 <div class="form-group">
                   <input type="text" class="form-control form-control-lg" id="exampleInputCorporateName1" name="corporatename" placeholder="Corporate name"required>
@@ -47,7 +47,9 @@
                 <div class="form-group">
                   <input type="password" class="form-control form-control-lg" id="exampleInputPassword1" name="password" placeholder="Password"required>
                 </div>
-                <button>submit</button>  
+                <div class="form-group">
+                  <button type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" href="insert.php">Submit</button>
+                </div> 
                 <div class="text-center mt-4 font-weight-light">
                   Already have an account? <a href="login.php" class="text-primary">Login</a>
                 </div>
