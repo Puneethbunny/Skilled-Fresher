@@ -23,11 +23,14 @@
               </div>
               <h4>Enter your Email ID to reset your password</h4>
               <!-----form---->
-              <form class="pt-3" action="checklogin.php" method="post">
-                
+              <form class="pt-3" action="forgotvalid.php" method="post">
+              <?php if (isset($_GET['error'])) { ?>
+              <p style="color:red" class="error"><?php echo $_GET['error']; ?></p>
+                <?php } ?>
                 <div class="form-group">
-                  <input type="email" name="uname" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="email">
+                  <input type="email" name="email" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="email">
                 </div>
+              
                 <div class="mt-3">
                   <button type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" >Confirm</button>
                 </div>
@@ -35,7 +38,6 @@
                 <a href="login.php" class="text-primary">Go back</a>
                 </div>
               </form>
-
             </div>
           </div>
         </div>
