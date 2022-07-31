@@ -1,3 +1,12 @@
+<?php  
+session_start();  
+  
+if(!$_SESSION['Email'])  
+{  
+  
+    header("Location: login.php");//redirect to the login page to secure the welcome page without login access.  
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,6 +31,7 @@
   <link rel="shortcut icon" href="images/favicon.png" />
 </head>
 <body>
+
   <div class="container-scroller">
     <!-- partial:partials/_navbar.html -->
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
@@ -103,7 +113,7 @@
                 <i class="ti-settings text-primary"></i>
                 Settings
               </a>
-              <a class="dropdown-item">
+              <a href="logout.php" class="dropdown-item">
                 <i class="ti-power-off text-primary"></i>
                 Logout
               </a>
@@ -404,7 +414,7 @@
             <div class="col-md-12 grid-margin">
               <div class="row">
                 <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-                  <h3 class="font-weight-bold">Welcome Aamir</h3>
+                  <h3 class="font-weight-bold">Welcome</h3>
                   <h6 class="font-weight-normal mb-0">All systems are running smoothly! You have <span class="text-primary">3 unread alerts!</span></h6>
                 </div>
                 <div class="col-12 col-xl-4">
