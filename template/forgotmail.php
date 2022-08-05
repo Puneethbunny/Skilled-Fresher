@@ -21,7 +21,29 @@
               <div class="brand-logo">
                 <img src="images/icon.jpg" alt="logo">
               </div>
-              <h4>Check your email</h4>
+              <h4>Enter the otp sent to your mail and reset your password</h4>
+              <form class="pt-3" action="forgotfinal.php" method="POST">
+              <?php if (isset($_GET['error'])) { ?>
+              <p style="color:red" class="error"><?php echo $_GET['error']; ?></p>
+              <?php } ?>
+              
+                <div class="form-group">
+                  <input type="otp" class="form-control form-control-lg" id="otp" name="otpp" placeholder="Enter 4 digit OTP"required>
+                </div>
+                <div class="form-group">
+                  <input type="password" class="form-control form-control-lg" id="exampleInputPassword1" name="password1" placeholder="New Password"required>
+                </div>
+                <div class="form-group">
+                  <input type="password" class="form-control form-control-lg" id="exampleInputPassword2" name="password2" placeholder=" Confirm Password"required>
+                </div>
+                <div class="form-group">
+                  <button type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" href="insert.php">Submit</button>
+                </div> 
+                <div class="text-center mt-4 font-weight-light">
+                  Already have an account? <a href="login.php" class="text-primary">Login</a>
+                </div>
+                 
+              </form>
               
             </div>
           </div>
