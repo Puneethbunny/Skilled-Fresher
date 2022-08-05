@@ -3,15 +3,16 @@
 	use PHPMailer\PHPMailer\SMTP;
 	use PHPMailer\PHPMailer\Exception;
 session_start(); 
-include "connection.php";
-if (isset($_POST['email']) ) {
+include "connection.php"; 
+$_SESSION[$temp]= $_POST['femail'];
+if (isset($_POST['femail']) ) {
     function validate($data){
        $data = trim($data);
        $data = stripslashes($data);
        $data = htmlspecialchars($data);
        return $data;
     }
-    $email = validate($_POST['email']);
+    $email = validate($_POST['femail']);
     if (empty($email)) {
         header("Location: forgot.php?error=Enter your email Id");
         exit();
@@ -23,7 +24,8 @@ if (isset($_POST['email']) ) {
             $row = mysqli_fetch_assoc($result);
             if ($row['Email'] === $email) {
                 $_SESSION['Email'] = $row['Email'];                 //mana mail code
-                $email=$_POST['email'];
+                $_SESSION['otp']=rand(999,9999);
+                $otp=$_SESSION['otp'];
 	require 'includes/PHPMailer.php';
 	require 'includes/SMTP.php';
 	require 'includes/Exception.php';
@@ -45,7 +47,9 @@ if (isset($_POST['email']) ) {
 //Attachment
 	$mail->addAttachment('img/attachment.png');
 //Email body
-	$mail->Body = "<h1>denama jeevitham</h1></br><p>This is html paragraph</p>";
+	$mail->Body = "<h1>OTP to reset your Skiler-Fresher password is $otp</h1></br><p>This is html paragraph</p>";
+    
+    //$mail->Body = $row['Password'];
 //Add recipient
 	$mail->addAddress($email);
 	if ( $mail->send() ) {
