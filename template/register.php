@@ -27,7 +27,7 @@
           <div class="col-lg-4 mx-auto">
             <div class="auth-form-light text-left py-5 px-4 px-sm-5">
               <div class="brand-logo">
-                <img src="images/icon.jpg" alt="logo">
+                <img style="width:65%;height:25%" src="images/icon.jpg" alt="logo">
               </div>
               <h4>New here?</h4>
               <h6 class="font-weight-light">Signing up is easy. It only takes a few steps</h6>
@@ -47,8 +47,12 @@
                 <div class="form-group">
                   <input type="password" class="form-control form-control-lg" id="exampleInputPassword1" name="password" placeholder="Password"required>
                 </div>
+                <h5>Upload your logo</h5>
                 <div class="form-group">
-                  <button type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" href="insert.php">Submit</button>
+                  <input type="file" class="file-upload-input" onchange=readURL(this) accept="image/*" name="image">
+                </div> 
+                <div class="form-group">
+                  <button type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" href="insert.php">Register</button>
                 </div> 
                 <div class="text-center mt-4 font-weight-light">
                   Already have an account? <a href="login.php" class="text-primary">Login</a>
