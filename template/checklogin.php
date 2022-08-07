@@ -24,9 +24,8 @@ if (isset($_POST['uname']) && isset($_POST['password'])) {
             if ($row['Email'] === $uname && $row['Password'] === $pass) {
                 echo "Logged in!";
                 $_SESSION['Email'] = $row['Email'];
-                $_SESSION['name'] = $row['name'];
-                $_SESSION['id'] = $row['id']; 
-                $_SESSION['User']= $row['uname'];               
+                $_SESSION['CorporateName'] = $row['CorporateName'];
+                $_SESSION['id'] = $row['id'];               
                 header("Location: indexx.php");
                 exit();
             }else{
