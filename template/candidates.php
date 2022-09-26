@@ -7,7 +7,7 @@ if(!$_SESSION['Email'])
   
     header("Location: login.php");//redirect to the login page to secure the welcome page without login access.  
 }
-$sql = " SELECT * FROM Corporates ORDER BY Id ";
+$sql = " SELECT * FROM Candidates ORDER BY Id ";
 $result = $sfconn->query($sql);
 $sfconn->close();
 ?>
@@ -34,10 +34,14 @@ $sfconn->close();
   <!-- endinject -->
   <link rel="shortcut icon" href="images/favicon.png" />
   <link rel="shortcut icon" href="../../images/favicon.png" /> 
-  <script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
-  <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+
            <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" />
-               <script type="text/javascript" language="javascript" src="app.js"></script>
+           <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
+<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
+               
 </head>
 <body>
 
@@ -328,42 +332,55 @@ $sfconn->close();
           </li>
       </nav>
       <!-- partial -->
+      <script>clickfunc = function(link) {
+var t = link.innerText || link.textContent;
+sessionStorage.setItem("t", t);
+}</script>
       <div class="main-panel">
         <div class="content-wrapper">
           <div class="row">
             <div class="col-md-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <p class="card-title">Corporates Table</p>
+                  <p class="card-title">Candidates Table</p>
                   <div class="row">
                     <div class="col-12">
                       <div class="table-responsive">
-                      <table  id="employee_data" class="table table-striped table-bordered">
+                      <table  id="eexample"  class="table table-striped table-bordered" style="width:100%">
+                      <thead>
             <tr>
                 <th>FirstName</th>
                 <th>LastName</th>
                 <th>Email</th>
-                <th>Password</th>
+                <th>Current Location</th>
+                <th>Mobile</th>
             </tr>
+</thead>
             <!-- PHP CODE TO FETCH DATA FROM ROWS -->
             <?php
                 // LOOP TILL END OF DATA
                 while($rows=$result->fetch_assoc())
                 {
             ?>
+            <tbody>
+
             <tr>
+            
                 <!-- FETCHING DATA FROM EACH
                     ROW OF EVERY COLUMN -->
-                <td><?php echo $rows['FirstName'];?></td>
+                <td><a href=candidatedetails.php onclick='clickfunc(this)'><?php echo $rows['FirstName'];?></td>
                 <td><?php echo $rows['LastName'];?></td>
                 <td><?php echo $rows['Email'];?></td>
-                <td><?php echo $rows['Password'];?></td>
+                <td><?php echo $rows['CurrentLocation'];?></td>
+                <td><?php echo $rows['Mobile'];?></td>
             </tr>
             <?php
                 }
             ?>
+            </tbody>
+            
         </table>
-                      </div>
+                      </div> 
                     </div>
                   </div>
                   </div>
@@ -388,6 +405,11 @@ $sfconn->close();
   <!-- container-scroller -->
 
   <!-- plugins:js -->
+  <script type="text/javascript">
+    	$(document).ready(function() {
+		    $('#eexample').DataTable();
+		});
+</script>
   <script src="vendors/js/vendor.bundle.base.js"></script>
   <!-- endinject -->
   <!-- Plugin js for this page -->
