@@ -9,7 +9,7 @@ if(!$_SESSION['Email'])
 }
 $sql = " SELECT * FROM Candidates ORDER BY Id ";
 $result = $sfconn->query($sql);
-$sfconn->close();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -368,11 +368,12 @@ sessionStorage.setItem("t", t);
             
                 <!-- FETCHING DATA FROM EACH
                     ROW OF EVERY COLUMN -->
-                <td><a href=candidatedetails.php onclick='clickfunc(this)'><?php echo $rows['FirstName'];?></td>
+                <td><a style="color: black" href=candidatedetails.php onclick='clickfunc(this)'><?php echo $rows['FirstName'];?></td>
                 <td><?php echo $rows['LastName'];?></td>
                 <td><?php echo $rows['Email'];?></td>
                 <td><?php echo $rows['CurrentLocation'];?></td>
                 <td><?php echo $rows['Mobile'];?></td>
+                <!--<td><button type="button" class="btn btn-outline-primary btn-fw">View Details</button></td>-->
             </tr>
             <?php
                 }
