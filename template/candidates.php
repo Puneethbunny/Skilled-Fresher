@@ -330,7 +330,13 @@ $result = $sfconn->query($sql);
               <span class="menu-title">Candidates</span>
             </a>
           </li>
-      </nav>
+          <li class="nav-item">
+            <a class="nav-link" href="candidates.php">
+              <i class="icon-head menu-icon"></i>
+              <span class="menu-title">My Candidates</span>
+            </a>
+          </li>
+        </nav>
       <!-- partial -->
       <script>clickfunc = function(link) {
 var t = link.innerText || link.textContent;
@@ -349,8 +355,8 @@ sessionStorage.setItem("t", t);
                       <table  id="eexample"  class="table table-striped table-bordered" style="width:100%">
                       <thead>
             <tr>
-                <th>FirstName</th>
-                <th>LastName</th>
+            <th>Like</th>
+                <th>Name</th>
                 <th>Email</th>
                 <th>Current Location</th>
                 <th>Mobile</th>
@@ -368,8 +374,10 @@ sessionStorage.setItem("t", t);
             
                 <!-- FETCHING DATA FROM EACH
                     ROW OF EVERY COLUMN -->
-                <td><a style="color: black" href=candidatedetails.php onclick='clickfunc(this)'><?php echo $rows['FirstName'];?></td>
-                <td><?php echo $rows['LastName'];?></td>
+                <td><button type="button" class="btn btn-outline-secondary btn-rounded btn-icon">
+                        <i class="ti-heart text-danger"></i>
+                      </button></td>    
+                <td><?php echo $rows['FirstName'],' ',$rows['LastName'];?></td>
                 <td><?php echo $rows['Email'];?></td>
                 <td><?php echo $rows['CurrentLocation'];?></td>
                 <td><?php echo $rows['Mobile'];?></td>
