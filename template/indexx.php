@@ -1,4 +1,5 @@
 <?php  
+include "connection.php";
 session_start();  
   
 if(!$_SESSION['Email'])  
@@ -6,6 +7,24 @@ if(!$_SESSION['Email'])
   
     header("Location: login.php");//redirect to the login page to secure the welcome page without login access.  
 }
+$sql = "SELECT * from Candidates";
+
+if ($result = $sfconn->query($sql)) {
+
+    // Return the number of rows in result set
+    $rowcount = mysqli_num_rows( $result );
+
+    
+    // Display result
+    
+ }
+ $sql1 = "SELECT * from CandidateLikes";
+
+if ($result1 = $sfconn->query($sql1)) {
+
+    // Return the number of rows in result set
+    $rowcount1 = mysqli_num_rows( $result1 );
+}   
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -62,10 +81,7 @@ if(!$_SESSION['Email'])
               <img  alt="profile"/>
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-              <a class="dropdown-item">
-                <i class="ti-settings text-primary"></i>
-                Settings
-              </a>
+              
               <a href="logout.php" class="dropdown-item">
                 <i class="ti-power-off text-primary"></i>
                 Logout
@@ -129,16 +145,9 @@ if(!$_SESSION['Email'])
             <div class="col-md-6 grid-margin stretch-card">
               <div class="card tale-bg">
                 <div class="card-people mt-auto">
-                  <img src="images/dashboard/people.svg" alt="people">
+                  <img src="images/dashboard/people1.jpg" alt="people">
                   <div class="weather-info">
                     <div class="d-flex">
-                      <div>
-                        <h2 class="mb-0 font-weight-normal"><i class="icon-sun mr-2"></i>31<sup>C</sup></h2>
-                      </div>
-                      <div class="ml-2">
-                        <h4 class="location font-weight-normal">Bangalore</h4>
-                        <h6 class="font-weight-normal">India</h6>
-                      </div>
                     </div>
                   </div>
                 </div>
@@ -149,18 +158,17 @@ if(!$_SESSION['Email'])
                 <div class="col-md-6 mb-4 stretch-card transparent">
                   <div class="card card-tale">
                     <div class="card-body">
-                      <p class="mb-4">Today’s Bookings</p>
-                      <p class="fs-30 mb-2">4006</p>
-                      <p>10.00% (30 days)</p>
+                      <p class="mb-4">Total Candidates</p>
+                      <p class="fs-30 mb-2"><?php echo $rowcount; ?></p>
                     </div>
                   </div>
                 </div>
                 <div class="col-md-6 mb-4 stretch-card transparent">
                   <div class="card card-dark-blue">
                     <div class="card-body">
-                      <p class="mb-4">Total Bookings</p>
-                      <p class="fs-30 mb-2">61344</p>
-                      <p>22.00% (30 days)</p>
+                      <p class="mb-4">My Candidates</p>
+                      <p class="fs-30 mb-2"><?php echo $rowcount1; ?></p>
+                      
                     </div>
                   </div>
                 </div>
