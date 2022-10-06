@@ -1,4 +1,4 @@
-<?php
+<?php  
 include "connection.php";
 session_start();  
   
@@ -7,8 +7,56 @@ if(!$_SESSION['Email'])
   
     header("Location: login.php");//redirect to the login page to secure the welcome page without login access.  
 }
-$sql = " SELECT * FROM Candidates ORDER BY Id ";
+?>
+     <script> var m = sessionStorage.getItem("t");
+     document.cookie="m ="+m;
+</script>
+
+<style>
+body {font-family: Arial;}
+
+/* Style the tab */
+.tab {
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-top: none;
+}
+</style>
+<?php
+$f=$_COOKIE['m'];
+$sql = " SELECT * FROM Candidates where FirstName='$f' ";
 $result = $sfconn->query($sql);
+
 
 ?>
 <!DOCTYPE html>
@@ -33,15 +81,8 @@ $result = $sfconn->query($sql);
   <link rel="stylesheet" href="css/vertical-layout-light/style.css">
   <!-- endinject -->
   <link rel="shortcut icon" href="images/favicon.png" />
-  <link rel="shortcut icon" href="../../images/favicon.png" /> 
+  
 
-           <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" />
-           <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-
-<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-
-<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
-               
 </head>
 <body>
 
@@ -49,7 +90,7 @@ $result = $sfconn->query($sql);
     <!-- partial:partials/_navbar.html -->
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
       <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-        <a class="navbar-brand brand-logo mr-5" href="indexx.php"><img style="width:100%;height:100%" src="images/logo.jpeg" class="mr-2" alt="logo"/></a>
+        <a class="navbar-brand brand-logo mr-5" href="indexx.php"><img style="width:100%;height:52%" src="images/logo.jpeg" class="mr-2" alt="logo"/></a>
         <a class="navbar-brand brand-logo-mini" href="indexx.php"><img style="width:100%;height:100%" src="images/logo-light.png" alt="logo"/></a>
       </div>
       <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
@@ -69,7 +110,7 @@ $result = $sfconn->query($sql);
           </li>
         </ul>
         <ul class="navbar-nav navbar-nav-right">
-          
+
           <li class="nav-item nav-profile dropdown">
             <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
               <img  alt="profile"/>
@@ -85,14 +126,14 @@ $result = $sfconn->query($sql);
               </a>
             </div>
           </li>
-         
+
       </div>
     </nav>
     <!-- partial -->
     <div class="container-fluid page-body-wrapper">
       <!-- partial:partials/_settings-panel.html -->
 
-
+    
       <!-- partial -->
       <!-- partial:partials/_sidebar.html -->
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
@@ -112,35 +153,47 @@ $result = $sfconn->query($sql);
           <li class="nav-item">
             <a class="nav-link" href="candidates.php">
               <i class="icon-head menu-icon"></i>
-              <span class="menu-title"> My Candidates</span>
+              <span class="menu-title"> MyCandidates</span>
             </a>
           </li>
       </nav>
-      <!-- partial -->
-      <script>clickfunc = function(link) {
-var t = link.innerText || link.textContent;
-sessionStorage.setItem("t", t);
-}</script>
       <div class="main-panel">
         <div class="content-wrapper">
           <div class="row">
             <div class="col-md-12 grid-margin stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <p class="card-title">Candidates Table</p>
+                  
+                  <p class="card-title"><?php echo $f;?>'s Details</p>
                   <div class="row">
                     <div class="col-12">
-                      <div class="table-responsive">
-                      <table  id="eexample"  class="table table-striped table-bordered" style="width:100%">
+     <div> <div class="tab">
+  <button class="tablinks" onclick="openCity(event, 'Details')" id="defaultOpen">Details</button>
+  <button class="tablinks" onclick="openCity(event, 'Awards')">Awards</button>
+  <button class="tablinks" onclick="openCity(event, 'Courses')">Courses</button>
+  <button class="tablinks" onclick="openCity(event, 'ExtraCurricular')">ExtraCurricular</button>
+  <button class="tablinks" onclick="openCity(event, 'Hobbies')">Hobbies</button>
+  <button class="tablinks" onclick="openCity(event, 'Inventions')">Inventions</button>
+  <button class="tablinks" onclick="openCity(event, 'Trainings')">Trainings</button>
+  <button class="tablinks" onclick="openCity(event, 'Projects')">Projects</button>
+  <button class="tablinks" onclick="openCity(event, 'Skills')">Skills</button>
+  
+</div>
+
+<!-- Tab content -->
+<div id="Details" class="tabcontent">
+  
+   <table  id="eexample"  class="table table-striped table-bordered" style="width:100%">
                       <thead>
             <tr>
+              
                 <th>FirstName</th>
                 <th>LastName</th>
-                <th>Year Of Passing</th>
+                <th>Email</th>
                 <th>Current Location</th>
                 <th>Mobile</th>
             </tr>
-</thead>
+        </thead>
             <!-- PHP CODE TO FETCH DATA FROM ROWS -->
             <?php
                 // LOOP TILL END OF DATA
@@ -150,21 +203,14 @@ sessionStorage.setItem("t", t);
             <tbody>
 
             <tr>
-              <?php $course= $rows['Id']; ?>
-            <?php $sql2 = " SELECT YearOfPassing FROM CandidateCourses where CandidateId='$course' ";
-$result2 = $sfconn->query($sql2);
-
- ?>
+            
                 <!-- FETCHING DATA FROM EACH
                     ROW OF EVERY COLUMN -->
-                <td><a href=candidatedetails.php onclick='clickfunc(this)'><?php echo $rows['FirstName'];?></td>
-                <td><?php echo $rows['LastName'];?></td>
-                <td><?php 
-                while($rows1=$result2->fetch_assoc())
-                {
-                echo $rows1['YearOfPassing'];
+                    <?php $id= $rows['Id']; ?>
                 
-                }?></td>
+                <td><?php echo $rows['FirstName'];?></td>
+                <td><?php echo $rows['LastName'];?></td>
+                <td><?php echo $rows['Email'];?></td>
                 <td><?php echo $rows['CurrentLocation'];?></td>
                 <td><?php echo $rows['Mobile'];?></td>
             </tr>
@@ -174,22 +220,312 @@ $result2 = $sfconn->query($sql2);
             </tbody>
             
         </table>
-                      </div> 
-                    </div>
-                  </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-        </div>
-        <!-- content-wrapper ends -->
-        <!-- partial:partials/_footer.html -->
-        <footer class="footer">
-          <div class="d-sm-flex justify-content-center justify-content-sm-between">
-            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2021.  Premium <a href="https://www.bootstrapdash.com/" target="_blank">Bootstrap admin template</a> from BootstrapDash. All rights reserved.</span>
-            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with <i class="ti-heart text-danger ml-1"></i></span>
-          </div>
-        </footer>
+</div>
+
+<div id="Awards" class="tabcontent">
+  <?php $sql1 = " SELECT * FROM CandidateAwards where CandidateId='$id' ";
+$result1 = $sfconn->query($sql1); ?>
+  
+<table  id="eexample"  class="table table-striped table-bordered" style="width:100%">
+                      <thead>
+            <tr>
+              
+              <th> AwardName</th>
+              <th> Year</th>
+              <th> Description</th>
+                
+            </tr>
+        </thead>
+            <!-- PHP CODE TO FETCH DATA FROM ROWS -->
+            <?php
+                // LOOP TILL END OF DATA
+                while($rows=$result1->fetch_assoc())
+                {
+            ?>
+            <tbody>
+
+            <tr>
+            
+                <!-- FETCHING DATA FROM EACH
+                    ROW OF EVERY COLUMN -->
+                  
+                  
+                  <td><?php echo  $rows['AwardName'];?></td>
+                  <td><?php echo  $rows['YearAwarded'];?></td>
+                  <td><?php echo  $rows['Description'];?></td>
+               
+            </tr>
+            <?php
+                }
+            ?>
+            </tbody>
+            
+        </table>
+  
+</div>
+
+<div id="Courses" class="tabcontent">
+<?php $sql2 = " SELECT * FROM CandidateCourses where CandidateId='$id' ";
+$result2 = $sfconn->query($sql2);
+ ?>
+ 
+  <table  id="eexample"  class="table table-striped table-bordered" style="width:100%">
+                      <thead>
+            <tr>
+              
+              <th> CourseId</th>
+              <th> CollegeId</th>
+              <th> YearOfPassing</th>
+              <th> Score</th>
+                
+            </tr>
+        </thead>
+            <!-- PHP CODE TO FETCH DATA FROM ROWS -->
+            <?php
+                // LOOP TILL END OF DATA
+                while($rows=$result2->fetch_assoc())
+                {
+            ?>
+            <tbody>
+
+            <tr>
+            
+                <!-- FETCHING DATA FROM EACH
+                    ROW OF EVERY COLUMN -->
+                  
+                  
+                  <td><?php echo  $rows['CourseId'];?></td>
+                  <td><?php echo  $rows['CollegeId'];?></td>
+                  <td><?php echo  $rows['YearOfPassing'];?></td>
+                  <td><?php echo  $rows['Score'];?></td>
+
+               
+            </tr>
+            <?php
+                }
+            ?>
+            </tbody>
+            
+        </table>
+</div>
+<div id="ExtraCurricular" class="tabcontent">
+  
+<?php $sql3 = " SELECT * FROM CandidateExtraCurricular where CandidateId='$id' ";
+$result3 = $sfconn->query($sql3); 
+ ?>
+ 
+  <table  id="eexample"  class="table table-striped table-bordered" style="width:100%">
+                      <thead>
+            <tr>
+              
+              <th> Year</th>
+              <th> Activity</th>
+              
+                
+            </tr>
+        </thead>
+            <!-- PHP CODE TO FETCH DATA FROM ROWS -->
+            <?php
+                // LOOP TILL END OF DATA
+                while($rows=$result3->fetch_assoc())
+                {
+            ?>
+            <tbody>
+
+            <tr>
+            
+                <!-- FETCHING DATA FROM EACH
+                    ROW OF EVERY COLUMN -->
+                  
+                  
+                  <td><?php echo  $rows['Year'];?></td>
+                  <td><?php echo  $rows['Activity'];?></td>
+                  
+
+               
+            </tr>
+            <?php
+                }
+            ?>
+            </tbody>
+            
+        </table>
+</div>
+
+<div id="Hobbies" class="tabcontent">
+<?php $sql4 = " SELECT * FROM CandidateHobbies where CandidateId='$id' ";
+$result4 = $sfconn->query($sql4);
+ ?>
+ 
+  <table  id="eexample"  class="table table-striped table-bordered" style="width:100%">
+                      <thead>
+            <tr>
+              
+              <th> Hobby</th>
+              
+                
+            </tr>
+        </thead>
+            <!-- PHP CODE TO FETCH DATA FROM ROWS -->
+            <?php
+                // LOOP TILL END OF DATA
+                while($rows=$result4->fetch_assoc())
+                {
+            ?>
+            <tbody>
+
+            <tr>
+            
+                <!-- FETCHING DATA FROM EACH
+                    ROW OF EVERY COLUMN -->
+                  
+                  
+                  <td><?php echo  $rows['Hobby'];?></td>
+                 
+
+               
+            </tr>
+            <?php
+                }
+            ?>
+            </tbody>
+            
+        </table>
+</div>
+
+<div id="Inventions" class="tabcontent">
+<?php $sql5 = " SELECT * FROM CandidateInventions where CandidateId='$id' ";
+$result5 = $sfconn->query($sql5);
+ ?>
+ 
+  <table  id="eexample"  class="table table-striped table-bordered" style="width:100%">
+                      <thead>
+            <tr>
+              
+              <th> InventionSummary</th>
+              <th> InventionDetails</th>
+              
+                
+            </tr>
+        </thead>
+            <!-- PHP CODE TO FETCH DATA FROM ROWS -->
+            <?php
+                // LOOP TILL END OF DATA
+                while($rows=$result5->fetch_assoc())
+                {
+            ?>
+            <tbody>
+
+            <tr>
+            
+                <!-- FETCHING DATA FROM EACH
+                    ROW OF EVERY COLUMN -->
+                  
+                  
+                  <td><?php echo  $rows['InventionSummary'];?></td>
+                  <td><?php echo  $rows['InventionDetails'];?></td>
+                 
+
+               
+            </tr>
+            <?php
+                }
+            ?>
+            </tbody>
+            
+        </table>
+  
+</div>
+<div id="Trainings" class="tabcontent">
+<?php $sql7 = " SELECT * FROM CandidateTrainings where CandidateId='$id' ";
+$result7 = $sfconn->query($sql7);
+ ?>
+ 
+  <table  id="eexample"  class="table table-striped table-bordered" style="width:100%">
+                      <thead>
+            <tr>
+              
+              <th> Name</th>
+              <th> Institute</th>
+              
+                
+            </tr>
+        </thead>
+            <!-- PHP CODE TO FETCH DATA FROM ROWS -->
+            <?php
+                // LOOP TILL END OF DATA
+                while($rows=$result7->fetch_assoc())
+                {
+            ?>
+            <tbody>
+
+            <tr>
+            
+                <!-- FETCHING DATA FROM EACH
+                    ROW OF EVERY COLUMN -->
+                  
+                  
+                  <td><?php echo  $rows['TrainingName'];?></td>
+                  <td><?php echo  $rows['TrainingInstitute'];?></td>
+                 
+
+               
+            </tr>
+            <?php
+                }
+            ?>
+            </tbody>
+            
+        </table>
+</div>
+<div id="Projects" class="tabcontent">
+<?php $sql6 = " SELECT * FROM CandidateProjects where CandidateId='$id' ";
+$result6 = $sfconn->query($sql6);
+ ?>
+ 
+  <table  id="eexample"  class="table table-striped table-bordered" style="width:100%">
+                      <thead>
+            <tr>
+              
+              <th> Title</th>
+              <th> Role</th>
+              
+                
+            </tr>
+        </thead>
+            <!-- PHP CODE TO FETCH DATA FROM ROWS -->
+            <?php
+                // LOOP TILL END OF DATA
+                while($rows=$result6->fetch_assoc())
+                {
+            ?>
+            <tbody>
+
+            <tr>
+            
+                <!-- FETCHING DATA FROM EACH
+                    ROW OF EVERY COLUMN -->
+                  
+                  
+                  <td><?php echo  $rows['ProjectTitle'];?></td>
+                  <td><?php echo  $rows['Role'];?></td>
+                 
+
+               
+            </tr>
+            <?php
+                }
+            ?>
+            </tbody>
+            
+        </table>
+</div><div id="Skills" class="tabcontent">
+
+</div>
+</div>
+</div>
+
+
         <!-- partial -->
       </div>
       <!-- main-panel ends -->
@@ -197,13 +533,25 @@ $result2 = $sfconn->query($sql2);
     <!-- page-body-wrapper ends -->
   </div>
   <!-- container-scroller -->
+  <script>
+function openCity(event, Details) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(Details).style.display = "block";
+  event.currentTarget.className += " active";
+}
 
-  <!-- plugins:js -->
-  <script type="text/javascript">
-    	$(document).ready(function() {
-		    $('#eexample').DataTable();
-		});
+// Get the element with id="defaultOpen" and click on it
+document.getElementById("defaultOpen").click();
 </script>
+  <!-- plugins:js -->
   <script src="vendors/js/vendor.bundle.base.js"></script>
   <!-- endinject -->
   <!-- Plugin js for this page -->
