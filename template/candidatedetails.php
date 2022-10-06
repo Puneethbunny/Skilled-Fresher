@@ -219,7 +219,8 @@ $result = $sfconn->query($sql);
             ?>
             </tbody>
             
-        </table>
+        </table><br>
+        <a href='candidates.php'><button type="button" class="btn btn-primary">Primary</button></a>
 </div>
 
 <div id="Awards" class="tabcontent">
@@ -260,7 +261,8 @@ $result1 = $sfconn->query($sql1); ?>
             ?>
             </tbody>
             
-        </table>
+        </table><br>
+        <a href='candidates.php'><button type="button" class="btn btn-primary">Primary</button></a>
   
 </div>
 
@@ -306,7 +308,8 @@ $result2 = $sfconn->query($sql2);
             ?>
             </tbody>
             
-        </table>
+        </table><br>
+        <a href='candidates.php'><button type="button" class="btn btn-primary">Primary</button></a>
 </div>
 <div id="ExtraCurricular" class="tabcontent">
   
@@ -349,7 +352,8 @@ $result3 = $sfconn->query($sql3);
             ?>
             </tbody>
             
-        </table>
+        </table><br>
+        <a href='candidates.php'><button type="button" class="btn btn-primary">Primary</button></a>
 </div>
 
 <div id="Hobbies" class="tabcontent">
@@ -390,7 +394,8 @@ $result4 = $sfconn->query($sql4);
             ?>
             </tbody>
             
-        </table>
+        </table><br>
+        <a href='candidates.php'><button type="button" class="btn btn-primary">Primary</button></a>
 </div>
 
 <div id="Inventions" class="tabcontent">
@@ -433,7 +438,8 @@ $result5 = $sfconn->query($sql5);
             ?>
             </tbody>
             
-        </table>
+        </table><br>
+        <a href='candidates.php'><button type="button" class="btn btn-primary">Primary</button></a>
   
 </div>
 <div id="Trainings" class="tabcontent">
@@ -476,7 +482,8 @@ $result7 = $sfconn->query($sql7);
             ?>
             </tbody>
             
-        </table>
+        </table><br>
+        <a href='candidates.php'><button type="button" class="btn btn-primary">Primary</button></a>
 </div>
 <div id="Projects" class="tabcontent">
 <?php $sql6 = " SELECT * FROM CandidateProjects where CandidateId='$id' ";
@@ -518,7 +525,8 @@ $result6 = $sfconn->query($sql6);
             ?>
             </tbody>
             
-        </table>
+        </table><br>
+        <a href='candidates.php'><button type="button" class="btn btn-primary">Primary</button></a>
 </div><div id="Skills" class="tabcontent">
 
 </div>
