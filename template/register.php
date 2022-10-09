@@ -32,6 +32,11 @@
               <h4>New here?</h4>
               <h6 class="font-weight-light">Signing up is easy. It only takes a few steps</h6>
               <form class="pt-3" action="insert.php" method="POST">
+                <?php if (isset($_GET['error'])) { ?>
+
+                <p style="color:red" class="error"><?php echo $_GET['error']; ?></p>
+
+                <?php } ?>
                 <div class="form-group">
                   <input type="text" class="form-control form-control-lg" id="exampleInputFirstName1" name="firstname" placeholder="First name"required>
                 </div>
@@ -81,6 +86,4 @@
   <!-- endinject -->
 </body>
 
-</html>
-Footer
-© 2022 GitHub, I
+</html
