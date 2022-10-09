@@ -41,6 +41,8 @@ $result = $sfconn->query($sql);
 <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 
 <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
+<script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
                
 </head>
 <body>
@@ -110,16 +112,16 @@ $result = $sfconn->query($sql);
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="indexx.php">
+            <a class="nav-link" href="mycandidates.php">
               <i class="icon-head menu-icon"></i>
               <span class="menu-title"> My Candidates</span>
             </a>
           </li>
       </nav>
       <!-- partial -->
-      <script type="text/javascript">clickfunc = function(link) {
-var t = link.innerText || link.textContent;
-window.alert(t);
+      <script type="text/javascript">clickfunc = function() {
+var t = <?php echo "$t"; ?> ;
+window.alert(hi);
 sessionStorage.setItem("t", t);
 }</script>
       <div class="main-panel">
@@ -140,6 +142,7 @@ sessionStorage.setItem("t", t);
                 <th>Year Of Passing</th>
                 <th>Current Location</th>
                 <th>Mobile</th>
+                <th>Like</th>
             </tr>
 </thead>
             <!-- PHP CODE TO FETCH DATA FROM ROWS -->
@@ -158,9 +161,7 @@ $result2 = $sfconn->query($sql2);
  ?>
                 <!-- FETCHING DATA FROM EACH
                     ROW OF EVERY COLUMN -->
-                    <?php $t = $rows['FirstName']; ?> 
-                    
-                <td><a onclick='clickfunc(this)' href=candidatedetails.php ><?php echo $rows['FirstName'];?></td>
+                <td><a href=candidatedetails.php onclick='clickfunc(this)'><?php echo $rows['FirstName'];?></td>
                 <td><?php echo $rows['LastName'];?></td>
                 <td><?php 
                 while($rows1=$result2->fetch_assoc())
@@ -170,8 +171,10 @@ $result2 = $sfconn->query($sql2);
                 }?></td>
                 <td><?php echo $rows['CurrentLocation'];?></td>
                 <td><?php echo $rows['Mobile'];?></td>
-                <td><button type="button" class="btn btn-primary">Primary</button></td>
-            </tr>
+                <td><button><a href="like.php?id=<?php echo $rows['Id'];?>"><i class="fa fa-heart-o" style="font-size:36px;"></i></a></button>
+                 
+             
+              </td>         </tr>
             <?php
                 }
             ?>
@@ -208,6 +211,7 @@ $result2 = $sfconn->query($sql2);
 		    $('#eexample').DataTable();
 		});
 </script>
+
 
   <script src="vendors/js/vendor.bundle.base.js"></script>
   <!-- endinject -->
