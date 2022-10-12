@@ -54,7 +54,7 @@
                 </div>
                 <h5>Upload your logo</h5>
                 <div class="form-group">
-                  <input type="file" class="file-upload-input" onchange=readURL(this) accept="image/*" name="image">
+                  <input type="file" class="file-upload-input" onchange=readURL(this) accept="image/*" name="image" required>
                 </div> 
                 <div class="form-group">
                   <button type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" href="insert.php">Register</button>
