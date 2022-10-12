@@ -43,7 +43,17 @@ $result = $sfconn->query($sql);
 <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
 <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-               
+<style>
+#fa {
+  font-size: 500px;
+  cursor: pointer;
+  user-select: none;
+}
+
+#fa :hover {
+  color: darkblue;
+}
+</style>               
 </head>
 <body>
 
@@ -71,30 +81,36 @@ $result = $sfconn->query($sql);
           </li>
         </ul>
         <ul class="navbar-nav navbar-nav-right">
-          
           <li class="nav-item nav-profile dropdown">
             <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
-              <img  alt="profile"/>
+            <?php $email=$_SESSION['Email'];
+             $q= "SELECT Logo FROM Corporates where Email='$email'";
+             $res = mysqli_query($sfconn, $q);
+             while($row=$res->fetch_assoc())
+                {
+              $s=$row['Logo'];  
+              }
+              echo "<img src='logo/".$s."' style='width:50px; height:50px;'> ";
+              ?>
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-              <a class="dropdown-item">
-                <i class="ti-settings text-primary"></i>
-                Settings
-              </a>
               <a href="logout.php" class="dropdown-item">
                 <i class="ti-power-off text-primary"></i>
                 Logout
               </a>
             </div>
           </li>
-         
+        </ul>
+        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+          <span class="icon-menu"></span>
+        </button>
       </div>
     </nav>
     <!-- partial -->
     <div class="container-fluid page-body-wrapper">
       <!-- partial:partials/_settings-panel.html -->
-
-
+      
+     
       <!-- partial -->
       <!-- partial:partials/_sidebar.html -->
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
@@ -112,16 +128,16 @@ $result = $sfconn->query($sql);
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="mycandidates.php">
-              <i class="icon-head menu-icon"></i>
-              <span class="menu-title"> My Candidates</span>
+            <a class="nav-link" href="likedcan.php">
+              <i class="icon-paper menu-icon"></i>
+              <span class="menu-title">My Candidates</span>
             </a>
           </li>
+          
       </nav>
       <!-- partial -->
-      <script type="text/javascript">clickfunc = function() {
-var t = <?php echo "$t"; ?> ;
-window.alert(hi);
+      <script>clickfunc = function(link) {
+var t = link.innerText || link.textContent;
 sessionStorage.setItem("t", t);
 }</script>
       <div class="main-panel">
@@ -171,8 +187,8 @@ $result2 = $sfconn->query($sql2);
                 }?></td>
                 <td><?php echo $rows['CurrentLocation'];?></td>
                 <td><?php echo $rows['Mobile'];?></td>
-                <td><button><a href="like.php?id=<?php echo $rows['Id'];?>"><i class="fa fa-heart-o" style="font-size:36px;"></i></a></button>
-                 
+                <td><a href="like.php?id=<?php echo $rows['Id'];?>"><i class="fa fa-heart-o" id="fa" style="font-size:36px;"></i></a>
+                <td><button type="button" class="btn btn-primary">Primary</button></td>
              
               </td>         </tr>
             <?php
@@ -211,8 +227,6 @@ $result2 = $sfconn->query($sql2);
 		    $('#eexample').DataTable();
 		});
 </script>
-
-
   <script src="vendors/js/vendor.bundle.base.js"></script>
   <!-- endinject -->
   <!-- Plugin js for this page -->
