@@ -24,6 +24,20 @@ if ($result1 = $sfconn->query($sql1)) {
 
     // Return the number of rows in result set
     $rowcount1 = mysqli_num_rows( $result1 );
+}
+$sql2 = "SELECT * from Colleges";
+
+if ($result2 = $sfconn->query($sql2)) {
+
+    // Return the number of rows in result set
+    $rowcount2 = mysqli_num_rows( $result2 );
+}
+$sql3 = "SELECT * from Skills";
+
+if ($result3 = $sfconn->query($sql3)) {
+
+    // Return the number of rows in result set
+    $rowcount3 = mysqli_num_rows( $result3 );
 }   
 ?>
 <!DOCTYPE html>
@@ -48,6 +62,25 @@ if ($result1 = $sfconn->query($sql1)) {
   <link rel="stylesheet" href="css/vertical-layout-light/style.css">
   <!-- endinject -->
   <link rel="shortcut icon" href="images/favicon.png" />
+  <style>
+        #object1 {
+            width: 20%;
+            height: 20%;
+           
+            object-fit: none;
+            object-position: absolute;
+            /* String value */
+        }
+  
+        #object2 {
+            width: 500px;
+            height: 200px;
+            background-color: green;
+            object-fit: none;
+            object-position: 50px 30px;
+            /* Numeric value */
+        }
+    </style>
 </head>
 <body>
 
@@ -78,7 +111,15 @@ if ($result1 = $sfconn->query($sql1)) {
           
           <li class="nav-item nav-profile dropdown">
             <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
-              <img  alt="profile"/>
+            <?php $email=$_SESSION['Email'];
+             $q= "SELECT Logo FROM Corporates where Email='$email'";
+             $result = mysqli_query($sfconn, $q);
+             while($rows=$result->fetch_assoc())
+                {
+              $s=$rows['Logo'];  
+              }
+              echo "<img src='logo/".$s."' style='width:50px; height:50px;'> ";
+              ?>
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
               
@@ -86,6 +127,7 @@ if ($result1 = $sfconn->query($sql1)) {
                 <i class="ti-power-off text-primary"></i>
                 Logout
               </a>
+              
             </div>
           </li>
          
@@ -117,8 +159,8 @@ if ($result1 = $sfconn->query($sql1)) {
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="candidates.php">
-              <i class="icon-head menu-icon"></i>
+            <a class="nav-link" href="likedcan.php">
+              <i class="icon-paper menu-icon"></i>
               <span class="menu-title">My Candidates</span>
             </a>
           </li>
@@ -145,7 +187,7 @@ if ($result1 = $sfconn->query($sql1)) {
             <div class="col-md-6 grid-margin stretch-card">
               <div class="card tale-bg">
                 <div class="card-people mt-auto">
-                  <img src="images/dashboard/people1.jpg" alt="people">
+                  <img  src="images/dashboard/people1.jpg" alt="people">
                   <div class="weather-info">
                     <div class="d-flex">
                     </div>
@@ -160,6 +202,7 @@ if ($result1 = $sfconn->query($sql1)) {
                     <div class="card-body">
                       <p class="mb-4">Total Candidates</p>
                       <p class="fs-30 mb-2"><?php echo $rowcount; ?></p>
+                      <p>Total number of candidates present</p>
                     </div>
                   </div>
                 </div>
@@ -168,7 +211,7 @@ if ($result1 = $sfconn->query($sql1)) {
                     <div class="card-body">
                       <p class="mb-4">My Candidates</p>
                       <p class="fs-30 mb-2"><?php echo $rowcount1; ?></p>
-                      
+                      <p>Approved Candidates</p>
                     </div>
                   </div>
                 </div>
@@ -177,18 +220,18 @@ if ($result1 = $sfconn->query($sql1)) {
                 <div class="col-md-6 mb-4 mb-lg-0 stretch-card transparent">
                   <div class="card card-light-blue">
                     <div class="card-body">
-                      <p class="mb-4">Number of Meetings</p>
-                      <p class="fs-30 mb-2">34040</p>
-                      <p>2.00% (30 days)</p>
+                      <p class="mb-4">Number of Colleges</p>
+                      <p class="fs-30 mb-2"><?php echo $rowcount2; ?></p>
+                      <p>Colleges associated with us</p>
                     </div>
                   </div>
                 </div>
                 <div class="col-md-6 stretch-card transparent">
                   <div class="card card-light-danger">
                     <div class="card-body">
-                      <p class="mb-4">Number of Clients</p>
-                      <p class="fs-30 mb-2">47033</p>
-                      <p>0.22% (30 days)</p>
+                      <p class="mb-4">Types of Skills</p>
+                      <p class="fs-30 mb-2"><?php echo $rowcount3; ?></p>
+                      <p>All skills of candidates</p>
                     </div>
                   </div>
                 </div>
