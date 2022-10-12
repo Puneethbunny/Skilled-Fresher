@@ -13,21 +13,20 @@
   $corporatename=$_POST['corporatename'];
   $email=$_POST['email'];
   $password=$_POST['password'];
-  $sql_e = "SELECT * FROM Corporates WHERE email='$email'";
-  $res_e = mysqli_query($sfconn, $sql_e);
-  if(mysqli_num_rows($res_e) > 0){
-      header("Location: register.php?error=Email ID in use ");
-      exit();
+  $file=$_FILES['file']['name'];
+    $fileTmpName=$_FILES['file']['tmp_name'];
+    $path= "logo/".$file;;
+    $query="INSERT INTO Corporates (firstname, lastname, corporatename, email, password,Logo) VALUES ('$firstname', '$lastname', '$corporatename', '$email', '$password','$file')";
+    $run= mysqli_query($sfconn,$query);
+    if($run){
+        move_uploaded_file($fileTmpName,$path);
+        header("Location: reg2.php?error=404 Not found");
+    exit();
+       
   }
   else{
-   $sql = "INSERT INTO Corporates (firstname, lastname, corporatename, email, password) VALUES ('$firstname', '$lastname', '$corporatename', '$email', '$password')";
-   if (mysqli_query($sfconn, $sql)) {
-    header("Location: reg2.php?error=404 Not found");
-    exit();
-   }
-   else {
-      echo "Error: " . $sql . "<br>" . mysqli_error($sfconn);
-   }
+    echo "Error: " . $sql . "<br>" . mysqli_error($sfconn);
   }
+  
   mysqli_close($sfconn);
 ?>
