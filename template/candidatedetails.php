@@ -113,7 +113,15 @@ $result = $sfconn->query($sql);
 
           <li class="nav-item nav-profile dropdown">
             <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
-              <img  alt="profile"/>
+            <?php $email=$_SESSION['Email'];
+             $q= "SELECT Logo FROM Corporates where Email='$email'";
+             $res = mysqli_query($sfconn, $q);
+             while($row=$res->fetch_assoc())
+                {
+              $s=$row['Logo'];  
+              }
+              echo "<img src='logo/".$s."' style='width:50px; height:50px;'> ";
+              ?>
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
               <a class="dropdown-item">
@@ -151,11 +159,12 @@ $result = $sfconn->query($sql);
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="candidates.php">
-              <i class="icon-head menu-icon"></i>
-              <span class="menu-title"> MyCandidates</span>
+            <a class="nav-link" href="likedcan.php">
+              <i class="icon-paper menu-icon"></i>
+              <span class="menu-title">My Candidates</span>
             </a>
           </li>
+          
       </nav>
       <div class="main-panel">
         <div class="content-wrapper">
@@ -219,8 +228,7 @@ $result = $sfconn->query($sql);
             ?>
             </tbody>
             
-        </table><br>
-        <a href='candidates.php'><button type="button" class="btn btn-primary">Primary</button></a>
+        </table>
 </div>
 
 <div id="Awards" class="tabcontent">
@@ -261,8 +269,7 @@ $result1 = $sfconn->query($sql1); ?>
             ?>
             </tbody>
             
-        </table><br>
-        <a href='candidates.php'><button type="button" class="btn btn-primary">Primary</button></a>
+        </table>
   
 </div>
 
@@ -308,8 +315,7 @@ $result2 = $sfconn->query($sql2);
             ?>
             </tbody>
             
-        </table><br>
-        <a href='candidates.php'><button type="button" class="btn btn-primary">Primary</button></a>
+        </table>
 </div>
 <div id="ExtraCurricular" class="tabcontent">
   
@@ -352,8 +358,7 @@ $result3 = $sfconn->query($sql3);
             ?>
             </tbody>
             
-        </table><br>
-        <a href='candidates.php'><button type="button" class="btn btn-primary">Primary</button></a>
+        </table>
 </div>
 
 <div id="Hobbies" class="tabcontent">
@@ -394,8 +399,7 @@ $result4 = $sfconn->query($sql4);
             ?>
             </tbody>
             
-        </table><br>
-        <a href='candidates.php'><button type="button" class="btn btn-primary">Primary</button></a>
+        </table>
 </div>
 
 <div id="Inventions" class="tabcontent">
@@ -438,8 +442,7 @@ $result5 = $sfconn->query($sql5);
             ?>
             </tbody>
             
-        </table><br>
-        <a href='candidates.php'><button type="button" class="btn btn-primary">Primary</button></a>
+        </table>
   
 </div>
 <div id="Trainings" class="tabcontent">
@@ -482,8 +485,7 @@ $result7 = $sfconn->query($sql7);
             ?>
             </tbody>
             
-        </table><br>
-        <a href='candidates.php'><button type="button" class="btn btn-primary">Primary</button></a>
+        </table>
 </div>
 <div id="Projects" class="tabcontent">
 <?php $sql6 = " SELECT * FROM CandidateProjects where CandidateId='$id' ";
@@ -525,8 +527,7 @@ $result6 = $sfconn->query($sql6);
             ?>
             </tbody>
             
-        </table><br>
-        <a href='candidates.php'><button type="button" class="btn btn-primary">Primary</button></a>
+        </table>
 </div><div id="Skills" class="tabcontent">
 
 </div>
