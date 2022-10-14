@@ -31,12 +31,7 @@
               </div>
               <h4>New here?</h4>
               <h6 class="font-weight-light">Signing up is easy. It only takes a few steps</h6>
-              <form class="pt-3" action="insert.php" method="POST">
-                <?php if (isset($_GET['error'])) { ?>
-
-                <p style="color:red" class="error"><?php echo $_GET['error']; ?></p>
-
-                <?php } ?>
+              <form class="pt-3" action="insert.php" method="POST" enctype="multipart/form-data">
                 <div class="form-group">
                   <input type="text" class="form-control form-control-lg" id="exampleInputFirstName1" name="firstname" placeholder="First name"required>
                 </div>
@@ -54,7 +49,7 @@
                 </div>
                 <h5>Upload your logo</h5>
                 <div class="form-group">
-                  <input type="file" class="file-upload-input" onchange=readURL(this) accept="image/*" name="image" required>
+                <input class="form-control form-control-sm" id="formFileSm" type="file" name="file"  required />
                 </div> 
                 <div class="form-group">
                   <button type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" href="insert.php">Register</button>
@@ -86,4 +81,4 @@
   <!-- endinject -->
 </body>
 
-</html
+</html>
