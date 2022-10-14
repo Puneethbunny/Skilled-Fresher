@@ -188,7 +188,7 @@ $result2 = $sfconn->query($sql2);
                 <td><?php echo $rows['CurrentLocation'];?></td>
                 <td><?php echo $rows['Mobile'];?></td>
                 <td><a href="like.php?id=<?php echo $rows['Id'];?>"><i class="fa fa-heart-o" id="fa" style="font-size:36px;"></i></a>
-                <td><button type="button" class="btn btn-primary">Primary</button></td>
+                
              
               </td>         </tr>
             <?php
